@@ -1,0 +1,108 @@
+.maindiv
+{
+width: 80%;
+height: auto;
+/* background-color: red; */
+font-size: 15px;
+justify-content: center;
+
+}
+.fielddiv
+{
+    width: 100%;
+    /* color: red; */
+    /* background-color: brown; */
+    display: flex;
+    gap: 50px;
+    margin-block-end: 25px;
+}
+.Label
+{
+    /* background-color: aqua; */
+    font-size: 15px;
+}
+.inputfield
+{
+    color: black;
+    width: 500px;
+    height: 45px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+
+}
+.fielddiv > div {
+    display: flex;
+    flex-direction: column; /* Stack the label above the input */
+    align-items: flex-start; /* Align items to the start */
+    width:100%;
+  }
+
+  .inputfile
+  {
+    color: black;
+    width: 220px;
+    height: 40px;
+    border: 1px solid #ccc;
+  }
+  .Addicon
+  {
+    /* background-color: red; */
+    margin-block: auto;
+    padding: 5px;
+    margin-block-start: 20px;
+    align-items: center;
+  }
+  .btnSubmit
+  {
+    /* background-color: red; */
+    margin-inline-start: 350px;
+    align-items: center;
+    padding: 50px;
+  }
+  .btnSub
+  {
+    width: 200px;
+    height: 61px;
+    background-color: #302c2c;
+    color: white;
+    font-size: 18px;
+    letter-spacing: 2px;
+  }
+  .labeldiv
+  {
+    /* background-color: red; */
+    margin-block-end:8px;
+  }
+  .fielddivcheck
+  {
+    /* background-color: red; */
+    margin-block-end: 13px;
+  }
+  .file_upload_input {
+    width: 220px;
+    height: 30px; /* Adjust height as needed */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding-top: 10px;
+  }
+  
+  .file_upload_input::-webkit-file-upload-button {
+    visibility: hidden;
+  }
+  .btnaddi
+  {
+    padding: 5px;
+    border: 1px solid #ccc;
+    width: 46px;
+  }
+  .requiredStar {
+    color: red; /* Red color for the star */
+    margin-left: 5px; /* Space between label text and star */
+  }
+  .errorcode
+  {
+    color: red; /* Red color for the star */
+    margin-left: 400px; /* Space between label text and star */
+    padding: 0;
+    margin: 0;
+  }
