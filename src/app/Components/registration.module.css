@@ -84,8 +84,6 @@ justify-content: center;
     border: 1px solid #ccc;
     border-radius: 4px;
     padding-top: 10px;
-    padding-right: 30px; /* Add padding to prevent text from overlapping with the icon */
-  
   }
   
   .file_upload_input::-webkit-file-upload-button {
@@ -108,17 +106,3 @@ justify-content: center;
     padding: 0;
     margin: 0;
   }
-  .inputWrapper {
-    position: relative; /* Create a relative positioning context for the icon */
-    display: inline-block; /* Keep the input field size consistent */
-  }
-  .uploadIcon {
-    position: absolute;
-    right: 10px; /* Position the icon inside the input field */
-    top: 50%;
-    transform: translateY(-50%); /* Center the icon vertically */
-    pointer-events: none; /* Make sure clicking the icon doesn't interfere with input click */
-    color: #2d2c2c; /* Set the icon color */
-  }
-  
-  
