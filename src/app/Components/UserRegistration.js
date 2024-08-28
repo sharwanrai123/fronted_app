@@ -1,10 +1,11 @@
 "use client";
 import {useState} from 'react'
-import Style from '../Components/registration.module.css';
+import Style from './registration.module.css';
 import InputBox from './InputBox';
 import AddIcon from '@mui/icons-material/Add';
 import DeleteIcon from '@mui/icons-material/Delete';
 import axios from 'axios';
+import FileUploadOutlinedIcon from '@mui/icons-material/FileUploadOutlined';
 
 
 const UserRegistration=()=>{
@@ -27,6 +28,17 @@ const UserRegistration=()=>{
   });
   const [addFileInputCount, setAddFileInputCount] = useState(0);
   const [isError, setisError] = useState(false);
+  const [errors, setErrors] = useState({
+    first_name: false,
+    last_name: false,
+    email: false,
+    dob: false,
+    street1: false,
+    street2: false,
+    file_name: false,
+    file_type: false,
+    uploaded_file: false,
+  });
   
 
   const onHandleChange = (e) => {
@@ -75,13 +87,34 @@ const UserRegistration=()=>{
   const addInputFile = () => {
     setAddFileInputCount(addFileInputCount + 1);
   };
+  const adddeleteFile=()=>{
+    setAddFileInputCount(addFileInputCount-1);
+  }
 
 
   const submitForm = () => {
-    if(User.first_name=='' && User.last_name=='' && User.email=='' && User.dob=='' && User.street1=='' && User.street2=='' && User.file_name=='' && User.file_type=='' && User.uploaded_file.length==0)
-      {
-         setisError(true);
-      } 
+    const newErrors = {
+      first_name: User.first_name === "",
+      last_name: User.last_name === "",
+      email: User.email === "",
+      dob: User.dob === "",
+      street1: User.street1 === "",
+      street2: User.street2 === "",
+      file_name: User.file_name === "",
+      file_type: User.file_type === "",
+      uploaded_file: User.uploaded_file.length === 0,
+    };
+
+    setErrors(newErrors);
+
+    const hasErrors = Object.values(newErrors).some((error) => error);
+    // if(User.first_name=='' && User.last_name=='' && User.email=='' && User.dob=='' && User.street1=='' && User.street2=='' && User.file_name=='' && User.file_type=='' && User.uploaded_file.length==0)
+    //   {
+    //      setisError(true);
+    //   } 
+    if(hasErrors){
+         return;
+    }
       else{
         const formData = new FormData();
 
@@ -125,19 +158,43 @@ const UserRegistration=()=>{
     return (
         <div className={Style.maindiv}>
           <div className={Style.fielddiv}>
-            <div><div className={Style.labeldiv}><label className={Style.Label}>First name<span className={Style.requiredStar}>*</span></label></div><div><input  onChange={(e)=>onHandleChange(e)} type='text' placeholder='Enter your first name here..' name="first_name" className={Style.inputfield}></input></div></div>
-            <div><div className={Style.labeldiv}><label className={Style.Label}>Last name<span className={Style.requiredStar}>*</span></label></div><div><input onChange={(e)=>onHandleChange(e)}  type='text' placeholder='Enter your last name here..' name="last_name" className={Style.inputfield}></input></div></div>
+            <div><div className={Style.labeldiv}><label className={Style.Label}>First name<span className={Style.requiredStar}>*</span></label></div><div><input  onChange={(e)=>onHandleChange(e)} type='text' placeholder='Enter your first name here..' name="first_name" className={Style.inputfield}></input>
+            {errors.first_name && (
+              <span className={Style.errorcode}>First name is required</span>
+            )}
+            </div></div>
+            <div><div className={Style.labeldiv}><label className={Style.Label}>Last name<span className={Style.requiredStar}>*</span></label></div><div><input onChange={(e)=>onHandleChange(e)}  type='text' placeholder='Enter your last name here..' name="last_name" className={Style.inputfield}></input>
+            {errors.last_name && (
+              <span className={Style.errorcode}>Last name is required</span>
+            )}
+            </div></div>
           </div>
 
           <div className={Style.fielddiv}>
-            <div><div className={Style.labeldiv}><label className={Style.Label}>email<span className={Style.requiredStar}>*</span></label></div><div><input onChange={(e)=>onHandleChange(e)}  type='email' placeholder='ex:myname@gmail.com' name="email" className={Style.inputfield}></input></div></div>
-            <div><div className={Style.labeldiv}><label className={Style.Label}>Date of Berth<span className={Style.requiredStar}>*</span></label></div><div><input onChange={(e)=>onHandleChange(e)}  type='date' placeholder='Date of Birth' name="dob" className={Style.inputfield}></input></div></div>
+            <div><div className={Style.labeldiv}><label className={Style.Label}>email<span className={Style.requiredStar}>*</span></label></div><div><input onChange={(e)=>onHandleChange(e)}  type='email' placeholder='ex:myname@gmail.com' name="email" className={Style.inputfield}></input>
+            {errors.email && (
+              <span className={Style.errorcode}>Email is required</span>
+            )}
+            </div></div>
+            <div><div className={Style.labeldiv}><label className={Style.Label}>Date of Berth<span className={Style.requiredStar}>*</span></label></div><div><input onChange={(e)=>onHandleChange(e)}  type='date' placeholder='Date of Birth' name="dob" className={Style.inputfield}></input>
+            {errors.dob && (
+              <span className={Style.errorcode}>Date of birth is required</span>
+            )}
+            </div></div>
           </div>
 
           <div className={Style.fielddiv2}>Residential Address</div>
           <div className={Style.fielddiv}>
-            <div><div className={Style.labeldiv}><label className={Style.Label}>Street 1<span className={Style.requiredStar}>*</span></label></div><div><input type='text' onChange={(e)=>onHandleChange(e)}  name="street1" className={Style.inputfield}></input></div></div>
-            <div><div className={Style.labeldiv}><label className={Style.Label}>Street 2<span className={Style.requiredStar}>*</span></label></div><div><input type='text' onChange={(e)=>onHandleChange(e)}  name="street2" className={Style.inputfield}></input></div></div>
+            <div><div className={Style.labeldiv}><label className={Style.Label}>Street 1<span className={Style.requiredStar}>*</span></label></div><div><input type='text' onChange={(e)=>onHandleChange(e)}  name="street1" className={Style.inputfield}></input>
+            {errors.street1 && (
+              <span className={Style.errorcode}>Street 1 is required</span>
+            )}
+            </div></div>
+            <div><div className={Style.labeldiv}><label className={Style.Label}>Street 2<span className={Style.requiredStar}>*</span></label></div><div><input type='text' onChange={(e)=>onHandleChange(e)}  name="street2" className={Style.inputfield}></input>
+            
+            {errors.street2 && (
+              <span className={Style.errorcode}>Street 2 is required</span>
+            )}</div></div>
           </div>
 
           <div className={Style.fielddivcheck}><input type="checkbox" name="isAddressSame" onChange={(e)=>onHandleChange(e)} ></input>Same as  Residential address </div>
@@ -149,7 +206,11 @@ const UserRegistration=()=>{
           </div>
 
           <div className={Style.fielddiv}>
-            <div><div className={Style.labeldiv}><label className={Style.Label}>File name<span className={Style.requiredStar}>*</span></label></div><div><input onChange={(e)=>onHandleChange(e)}  type='text' name="file_name" className={Style.inputfile}></input></div></div>
+            <div><div className={Style.labeldiv}><label className={Style.Label}>File name<span className={Style.requiredStar}>*</span></label></div><div><input onChange={(e)=>onHandleChange(e)}  type='text' name="file_name" className={Style.inputfile}></input>
+            {errors.file_name && (
+              <span className={Style.errorcode}>Street 2 is required</span>
+            )}
+            </div></div>
             <div><div className={Style.labeldiv}><label className={Style.Label}>Type of File<span className={Style.requiredStar}>*</span></label></div><div>
             <select
         id="file_type"
@@ -161,9 +222,16 @@ const UserRegistration=()=>{
         <option value="pdf">PDF</option>
         <option value="jpg">JPG</option>
       </select>
+      {errors.file_type && (
+              <span className={Style.errorcode}>Street 2 is required</span>
+            )}
               </div></div>
-            <div><div className={Style.labeldiv}><label className={Style.Label}>Upload Document<span className={Style.requiredStar}>*</span></label></div><div>
+            <div><div className={Style.labeldiv}><label className={Style.Label}>Upload Document<span className={Style.requiredStar}>*</span></label></div><div className={Style.inputWrapper}>
             <input type="file" id="file_upload1" name="uploaded_file1" className={Style.file_upload_input} onChange={(e)=>onHandleChange(e)} />
+            <FileUploadOutlinedIcon className={Style.uploadIcon}/>
+            {errors.uploaded_file && (
+              <span className={Style.errorcode}>Street 2 is required</span>
+            )}
               </div></div>
               <div><div className={Style.Addicon} ><button className={Style.btnaddi} onClick={addInputFile}><AddIcon/></button></div></div>
           </div>
@@ -174,7 +242,10 @@ const UserRegistration=()=>{
         <>
           {[...Array(addFileInputCount)].map((_, index) => (
                 <div key={index} className={Style.fielddiv}>
-                <div><div className={Style.labeldiv}><label className={Style.Label}>File name<span className={Style.requiredStar}>*</span></label></div><div><input  onChange={(e)=>onHandleChange(e)} type='text' name="file_name" className={Style.inputfile}></input></div></div>
+                <div><div className={Style.labeldiv}><label className={Style.Label}>File name<span className={Style.requiredStar}>*</span></label></div><div><input  onChange={(e)=>onHandleChange(e)} type='text' name="file_name" className={Style.inputfile}></input>
+                {errors.file_name && (
+              <span className={Style.errorcode}>Street 2 is required</span>
+            )}</div></div>
                 <div><div className={Style.labeldiv}><label className={Style.Label}>Type of File<span className={Style.requiredStar}>*</span></label></div><div>
                 <select
                     id="file_type"
@@ -186,11 +257,18 @@ const UserRegistration=()=>{
                     <option value="pdf">PDF</option>
                     <option value="jpg">JPG</option>
                   </select>
+                  {errors.file_type && (
+              <span className={Style.errorcode}>Street 2 is required</span>
+            )}
                     </div></div>
-                    <div><div className={Style.labeldiv}><label className={Style.Label}>Upload Document<span className={Style.requiredStar}>*</span></label></div><div>
+                    <div><div className={Style.labeldiv}><label className={Style.Label}>Upload Document<span className={Style.requiredStar}>*</span></label></div><div className={Style.inputWrapper}>
                         <input type="file"  id="file_upload2"  name="uploaded_file2" onChange={(e)=>onHandleChange(e)}  className={Style.file_upload_input}/>
+                        <FileUploadOutlinedIcon className={Style.uploadIcon}/>
+                        {errors.uploaded_file && (
+              <span className={Style.errorcode}>Street 2 is required</span>
+            )}
                           </div></div>
-                <div><div className={Style.Addicon}><button className={Style.btnaddi} onClick={addInputFile}><DeleteIcon/></button></div></div>
+                <div><div className={Style.Addicon}><button className={Style.btnaddi} onClick={adddeleteFile}><DeleteIcon/></button></div></div>
               </div>
           ))}
         </>
