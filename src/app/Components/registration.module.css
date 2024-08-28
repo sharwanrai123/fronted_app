@@ -1,11 +1,22 @@
 .maindiv
 {
-width: 80%;
 height: auto;
 /* background-color: red; */
 font-size: 15px;
 justify-content: center;
 
+}
+.headingdiv
+{
+    /* background-color: black; */
+    color: #504b4b;
+    font-size: 12px;
+    letter-spacing: 4px;
+    -webkit-margin-after: 10px;
+    margin-block-end: 10px;
+    height: 50px;
+    justify-content: center;
+    align-content: baseline;
 }
 .fielddiv
 {
@@ -24,7 +35,7 @@ justify-content: center;
 .inputfield
 {
     color: black;
-    width: 500px;
+    width: 448px;
     height: 45px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -34,7 +45,6 @@ justify-content: center;
     display: flex;
     flex-direction: column; /* Stack the label above the input */
     align-items: flex-start; /* Align items to the start */
-    width:100%;
   }
 
   .inputfile

@@ -157,6 +157,7 @@ const UserRegistration=()=>{
 
     return (
         <div className={Style.maindiv}>
+          <div className={Style.headingdiv}><h1>Registration Form</h1></div>
           <div className={Style.fielddiv}>
             <div><div className={Style.labeldiv}><label className={Style.Label}>First name<span className={Style.requiredStar}>*</span></label></div><div><input  onChange={(e)=>onHandleChange(e)} type='text' placeholder='Enter your first name here..' name="first_name" className={Style.inputfield}></input>
             {errors.first_name && (
